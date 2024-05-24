@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital signature standard</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Digital Signature Standard</h1>
+        <div class="tools">
+            <div class="create-key-section ">
+                <button class="btn">Tạo Khóa</button>
+                <div action="" class="form-1 window">
+                    <h3>Nhập các thành phần để tạo khóa</h3>                   
+                    <fieldset class="createKeysWay">
+                        <legend>Tùy chọn tạo khóa: </legend>
+                        <input type="radio" name="createWay" id="typing" checked>
+                        <label for="typing">Nhập tùy chọn</label>
+                        <input type="radio" name="createWay" id="randomKeys">
+                        <label for="randomKeys">Ngẫu nhiên</label>
+                    </fieldset>
+                    <div class="type-componet">
+                        <div class="typing-input">
+                            <label for="prime-p">Nhập số nguyên tố p (2<sup>L-1</sup> ≤ p ≤ 2<sup>L</sup> và 512 ≤ L ≤ 1024):</label>
+                            <input type="text" id="prime-p">
+                            <span class="valid-message"></span>
+                        </div>
+                        <div class="typing-input">
+                            <label for="q">Nhập số nguyên tố q sao cho q là là ước của p - 1 (2<sup>159</sup> ≤ q ≤ 2<sup>160</sup>): </label>
+                            <input type="text" id="q">
+                            <span class="valid-message"></span>
+                        </div>
+                        <div class="typing-input">
+                            <label for="h">Nhập số nguyên h bất kì (1 ≤ h ≤ p - 1) thỏa mãn g = h<sup>(p-1)/q</sup> > 1: </label>
+                            <input type="text" id = "h">
+                            <span class="valid-message"></span>
+                        </div>
+
+                        <div class="typing-input">
+                            <label for="x">Nhập số x bất kì (0 < x < q): </label>
+                            <input type="text" name="" id="x">
+                            <span class="valid-message"></span>
+                        </div>
+                    </div>
+                    <div class="btn-section">
+                        <button class="btn" id="create-btn">Tạo khóa</button>
+                        <button class="btn" id="reset-btn">Reset</button>
+                    </div>
+
+                    <div class="notifi-key">
+                        <p class="public-key-mess">Khóa công khai của bạn là: {p, q, r, y} = <span class="public"></span></p>
+                        <p class="private-key-mess">Khóa bí mật của bạn là: x = <span class="private"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="create-signature ">
+                <button class="btn">Tạo Chữ ký</button>
+                <div class ="form-section window signature">
+                    <h3>Tạo Chữ kí số</h3>
+                    <div class="take-message">
+                        <div class="input-choice">
+                            <label>Bản rõ: <br><textarea name="" class="input-box"></textarea></label>
+                        </div>
+                        <div class="file-choice">
+                            <label>Nhập file: <input type="file"></label>
+                        </div>
+                        <div class="enter-public-key">
+                            <label for="">Nhập số ngẫu nhiên k: <input type="text" id="k"></label><br>
+                            <label for="">Khóa công khai p,q,r,y: <input type="text" id="public"></label>
+                            <label for="">Khóa bí mật x: <input type="text" id="private"></label>
+                        </div>
+                        <button class="create-signature btn">Ký</button>
+                    </div>
+                    <div class="output-signature">
+                        <div class="output"></div>
+                        <div class="btn-section">
+                            <button class="btn">Chuyển</button>
+                            <button class="btn">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="verifying-signature ">
+                <button class="btn">Xác minh chữ ký</button>
+                <div class="form-section  verifying window">
+                    <div class="take-message ">
+                        <div class="message-section">
+                            <div class="input-choice">
+                                <label>Văn bản ký: <textarea name="" class="input-box"></textarea></label>
+                            </div>
+                            <div class="file-choice">
+                                <label>file văn bản: <input type="file"></label>
+                            </div>
+                        </div>
+                        <div class="signature-section">
+                            <div class="input-choice">
+                                <label>Chữ ký: <textarea name="" class="input-box"></textarea></label>
+                            </div>
+                            <div class="file-choice">
+                                <label>File chữ ký: <input type="file"></label>
+                            </div>
+                        </div>
+                        <div class="enter-public-key">
+                            <label for="">Khóa công khai p,q,r,y: <input type="text" id="public"></label>
+                            <label for="">Khóa bí mật x: <input type="text" id="private"></label>
+                        </div>
+                        <button class="create-signature btn">Kiểm tra chữ ký</button>
+                    </div>
+                    <div class="notifi-section">
+                        <p>Kết quả: <span class="notifi-answer"></span></p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body> 
+</html>
