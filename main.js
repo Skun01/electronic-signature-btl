@@ -1,6 +1,12 @@
-// main algorithm;
 
 
+//Thuat toan tao khoa
+
+//Lay lua chon cua nguoi dung:
+
+
+
+//// NGUOI DUNG NHAP MODE:
 
 
 

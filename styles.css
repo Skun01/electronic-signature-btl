@@ -195,3 +195,7 @@ fieldset{
 .special-btn{
     cursor: pointer;
 }
+
+fieldset .save-sig{
+    align-self: flex-end;
+}
