@@ -13,8 +13,8 @@
             <h2 class="sec-title">Tạo khóa</h2>
             <fieldset class="create-key-way">
                 <legend class="fieldset-title">Tùy chọn tạo khóa</legend>
-                <label class="radio-input"> <input name="create-ways" type="radio" checked> Nhập tùy chọn</label>
-                <label class="radio-input"> <input name="create-ways" type="radio"> Tạo ngẫu nhiên</label>
+                <label class="radio-input"> <input name="create-ways" type="radio" checked id="custom-way"> Nhập tùy chọn</label>
+                <label class="radio-input"> <input name="create-ways" type="radio" id="random-way"> Tạo ngẫu nhiên</label>
             </fieldset>
             <div class="input-lists">
                 <div class="input-sec">
@@ -39,13 +39,15 @@
                 </div>
             </div>
             <div class="btn-sec">
-                <button class="btn key-componets">Tạo khóa</button>
+                <button class="btn create-keys">Tạo khóa</button>
                 <button class="btn reset-btn">Reset</button>
             </div>
             <div class="result-sec">
                 <div class="res-wrapper">
-                    <div class="priv-res">Khóa công khai của bạn là: y = <input type="text" id="priv-res" readonly></div>
-                    <div class="pub-res">Khóa bí mật của bạn là: x = <input type="text" id="pub-res" readonly></div>
+                    <div class="pub-res">Thành phần khóa công khai: y = <input type="text" id="pub-res" readonly></div>
+                    <div class="pub-res">Thành phần khóa công khai: g = <input type="text" id="pub-g-res" readonly></div>
+
+                    <div class="priv-res">Khóa bí mật của bạn là: x = <input type="text" id="priv-res" readonly></div>
                 </div>
                 <button class="send-res special-btn">chuyển khóa xuống</button>
             </div>
@@ -140,5 +142,8 @@
             </div>
         </div>
     </div>
+    <script src="libaries.js"></script>
+    <script src="hashFunctionLibraries.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
