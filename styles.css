@@ -23,11 +23,15 @@ body{
     align-items: center;
     gap: 80px;
     padding: 15px 0;
+    background-image: url('./assets/img/background.avif');
 }
 
 /* main title */
 .main-title{
-
+    text-transform: uppercase;
+    background-color: white;
+    border-radius: 15px;
+    padding: 3px 15px;
 }
 
 .container{
@@ -58,12 +62,18 @@ fieldset{
     display: flex;
     gap: 20px;
     color: #140979;
-    border-radius: 10px;
+    border-radius: 30px;
     width: 50%;
+}
+
+fieldset legend{
+    text-transform: uppercase;
+    color: red;
 }
 
 .sec-title{
     text-align: center;
+    text-transform: uppercase;
 }
 
 .input-lists{
@@ -91,11 +101,11 @@ fieldset{
 }
 
 .input-sec>input:hover{
-    border-color: lightgreen;
+    border-color: green;
 }
 
 .input-sec>input:focus{
-    border-color: lightgreen;
+    border-color: green;
 }
 
 .valid-message{
@@ -169,7 +179,7 @@ fieldset{
     border: 1px solid black;
     border-radius: 6px;
     gap: 20px;
-    
+    box-shadow: 0px 0px 4px 5px #9fa8f7;
 }
 
 .request{
@@ -181,7 +191,6 @@ fieldset{
 .text-process fieldset{
     width: 100%;
     flex-direction: column;
-    background-color: rgb(243, 243, 195);
     box-shadow: 2px 2px 4px #bbc0ec;
 }
 
@@ -194,8 +203,27 @@ fieldset{
 
 .special-btn{
     cursor: pointer;
+    padding: 10px;
+    background-color: #F42F2C;
+    border: 2px solid #F42F2C;
+    box-shadow: 2px 2px 4px #979bc0;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.25s;
 }
+
+.special-btn:hover{
+    color: red;
+    background-color: white;
+}
+
+.special-btn:active{
+    box-shadow: none;
+}
+
+
 
 fieldset .save-sig{
     align-self: flex-end;
 }
+

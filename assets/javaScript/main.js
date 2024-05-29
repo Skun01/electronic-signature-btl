@@ -197,7 +197,7 @@ textCheckFile.addEventListener('change', e=>{
             const arrayBuffer = e.target.result;
             mammoth.extractRawText({ arrayBuffer: arrayBuffer })
                 .then(function(result) {
-                    textCheckElem.value = fr.result;
+                    textCheckElem.value = result.value;
                 })
                 .catch(function(err) {
                     console.error(err);
