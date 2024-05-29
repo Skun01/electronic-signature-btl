@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSS</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- nhung hai thu vien vao -->
 </head>
 <body>
     <h1 class="main-tile">Digital signature standard</h1>
@@ -44,10 +45,10 @@
             </div>
             <div class="result-sec">
                 <div class="res-wrapper">
-                    <div class="pub-res">Thành phần khóa công khai: y = <input type="text" id="pub-res" readonly></div>
+                    <div class="pub-res">Thành phần khóa công khai: y = <input type="text" id="pub-y-res" readonly></div>
                     <div class="pub-res">Thành phần khóa công khai: g = <input type="text" id="pub-g-res" readonly></div>
 
-                    <div class="priv-res">Khóa bí mật của bạn là: x = <input type="text" id="priv-res" readonly></div>
+                    <div class="priv-res">Khóa bí mật của bạn là: x = <input type="text" id="priv-x-res" readonly></div>
                 </div>
                 <button class="send-res special-btn">chuyển khóa xuống</button>
             </div>
@@ -86,7 +87,6 @@
                         <label for="hashmap">Chọn hàm băm</label>
                         <select name="" id="hashmap">
                             <option value="HSA-1">HSA-1</option>
-                            <option value="HSA-256">HSA-256</option>
                         </select>
                     </div>
                 </fieldset>
@@ -106,12 +106,6 @@
                             <input type="text" id="private-key">
                             <div class="valid-message"></div>
                         </div>
-                        <div class="input-sec">
-                            <label for="rand-k-num">Nhập số K ngẫu nhiên (0 < k < q): </label>
-                            <input type="text" id="rand-k-num">
-                            <div class="valid-message"></div>
-                        </div>
-                        <button class="rand-k-btn special-btn">random</button>
                     </div>
                     <button class="btn" id="making-sig">Tạo</button>
                 </div>
@@ -144,8 +138,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="libaries.js"></script>
-    <script src="hashFunctionLibraries.js"></script>
-    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
+    <script src="algorithmFunction.js"></script>
+    <script src="newMain.js"></script>
 </body>
 </html>
