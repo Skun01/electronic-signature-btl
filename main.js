@@ -89,6 +89,9 @@ const qPub = document.querySelector('#q-pub');
 const gPub = document.querySelector('#g-pub');
 const yPub = document.querySelector('#y-pub');
 
+//lay khoa bi mat x:
+const xPriv = document.querySelector('#private-key');
+
 //lay lua chon hash function:
 const hashMapElem = document.querySelector('#hashmap');
 
@@ -98,10 +101,10 @@ sendKeysElem.addEventListener('click', e=>{
     qPub.value = qPrime;
     gPub.value = g;
     yPub.value = y;
+    xPriv.value = xRandom;
 })
 
 /**TAO CHU KY SECTION */
-
 
 // lay K element
 const randKElem = document.querySelector('#rand-k-num');
@@ -169,9 +172,9 @@ fileText.addEventListener('change', e=>{
 const makeSigBtn = document.querySelector('#making-sig');
 
 //tao r va s khi bam nui;
-let r, s;
-makeSigBtn.addEventListener('click', function (){
 
+makeSigBtn.addEventListener('click', function (){
+    let r, s;
     //tao r
     r = powerMod(g, k, pPrime)%qPrime;
     //tao s:
@@ -198,5 +201,97 @@ saveSigBtn.addEventListener('click', function() {
     a.href = url;
     a.download = 'signature.txt';
     a.click();
+});
+
+
+//kiem tra chu ki
+
+//lay ban ro:
+const textCheckElem = document.querySelector('#text-check');
+//lay nut input file ban ro
+const textCheckFile = document.querySelector('#text-check-file');
+
+textCheckFile.addEventListener('change', e=>{
+    // lay file
+    const file = textCheckFile.files[0];
+
+    // xac dinh dinh dang file
+    const fileType = file.type;
+    let fileCategory;
+    if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        fileCategory = 'DOCX file';
+    } else if (fileType === 'text/plain') {
+        fileCategory = 'TXT file';
+    }
+
+    // xu ly dinh dang file
+    if(fileCategory === 'TXT file'){
+        const fr = new FileReader();
+        fr.readAsText(file);
+        console.log(file);
+        fr.addEventListener('load', e=>{
+            textCheckElem.value = fr.result;
+        });
+    }else{
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const arrayBuffer = e.target.result;
+            mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                .then(function(result) {
+                    textCheckElem.value = result.value;
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
+//lay r va s thong qua chu ki:
+const sigCheckElem = document.querySelector('#sig-check');
+//lay nut input file sig
+const sigCheckFile = document.querySelector('#sig-check-file');
+
+sigCheckFile.addEventListener('change', e=>{
+    const fr = new FileReader();
+    fr.readAsText(sigCheckFile.files[0]);
+    fr.onload = function(){
+        sigCheckElem.value = fr.result;
+        
+    }
+});
+
+//lay nut kiem tra
+const checkingBtnElem = document.querySelector('.checking-btn');
+checkingBtnElem.addEventListener('click', e=>{
+    //lay r va s;
+    let r = '', s = '';
+    const sigStr = sigCheckElem.value;
+    for(let i = 0; i < sigStr.length; i++){
+        if(i < sigStr.length/2) r += sigStr[i];
+        else s += sigStr[i];
+    }
+    let rSig = hexToBigInt(r);
+    let sSig = hexToBigInt(s);
+    let qBigInt = BigInt(qPub.value);
+    let pBigInt = BigInt(pPub.value);
+    let gBigInt = BigInt(gPub.value);
+    let yBigInt = BigInt(yPub.value);
+
+    // thuat toan kiem tra
+
+    //lay ban ro va ma hoa no
+    let hashTextCheck;
+    if(hashMapElem.value == "SHA-1") hashTextCheck = SHA1(textCheckElem.value);
+    else hashTextCheck = SHA256(textCheckElem.value);
+    let hashBigInt = BigInt('0x' + hashTextCheck);
+    const w = modInverse(sSig, qBigInt);
+    const u1 = (w*hashBigInt)%qBigInt;
+    const u2 = (rSig*w)%qBigInt;
+    const v = ((powerMod(gBigInt, u1, pBigInt)*powerMod(yBigInt, u2, pBigInt))%pBigInt)%qBigInt;
+    
+    //lay o ket qua:
+    const checkingResult = document.querySelector('#checking-res');
+    checkingResult.value = v === rSig ? "Chữ kí có hiệu lực!": "Văn bản đã bị sửa đổi!";
 });
 

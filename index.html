@@ -102,6 +102,11 @@
 
                     <div class="rand-sec">
                         <div class="input-sec">
+                            <label for="private-key">Nhập khóa bí mật: x =  </label>
+                            <input type="text" id="private-key">
+                            <div class="valid-message"></div>
+                        </div>
+                        <div class="input-sec">
                             <label for="rand-k-num">Nhập số K ngẫu nhiên (0 < k < q): </label>
                             <input type="text" id="rand-k-num">
                             <div class="valid-message"></div>
@@ -121,23 +126,18 @@
                     <h3 class="sec-title">Kiểm tra chữ ký</h3>
                     <fieldset>
                         <legend class="fieldset-title">Nhập bản rõ</legend>
-                        <textarea name="" id="sig-res"></textarea>
-                        <input type="file" id="text-file">
+                        <textarea name="" id="text-check"></textarea>
+                        <input type="file" id="text-check-file">
                     </fieldset>
                     <fieldset>
                         <legend class="fieldset-title">Nhập chữ ký</legend>
-                        <textarea name="" id="sig-res"></textarea>
-                        <input type="file" id="text-file">
+                        <textarea name="" id="sig-check"></textarea>
+                        <input type="file" id="sig-check-file">
                     </fieldset>
-                    <div class="input-sec">
-                        <label for="private-key">Nhập khóa bí mật: x =  </label>
-                        <input type="text" id="private-key">
-                        <div class="valid-message"></div>
-                    </div>
                     <button class="btn checking-btn">Kiểm tra</button>
                 </div>
                 <div class="respon">
-                    <p class="">Kết quả: <input type="text" id="checking-res" readonly></p>
+                    <p class="">Kết quả kiểm tra: <input type="text" id="checking-res" readonly></p>
                 </div>
             </div>
         </div>

@@ -21,7 +21,6 @@ function randomBinary(boundLeft, boundRight, mod = 1){
     for(let i = 0; i < bits; i++){
         res += (Math.floor(Math.random()*2)).toString();
     }
-    console.log(bits, res);
     return res;
 }
 
