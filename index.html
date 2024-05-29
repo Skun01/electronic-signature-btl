@@ -56,82 +56,82 @@
 
         <div class="wrapper cell">
             <h2 class="sec-title">Tạo và kiểm tra chữ ký</h2>
-            <div class="pub-key-input">
-                <h3 class="sec-title">Nhập khóa công khai</h3>
-                <fieldset>
-                    <legend>Nhập bộ khóa công khai {p, q, g, y}:</legend>
-                    <div class="input-lists">
-                        <div class="input-sec">
-                            <label for="p-pub">Nhập p:</label>
-                            <input type="text" id="p-pub">
-                            <span class="valid-message"></span>
-                        </div>
-                        <div class="input-sec">
-                            <label for="q-pub">Nhập q: </label>
-                            <input type="text" id="q-pub">
-                            <span class="valid-message"></span>
-                        </div>
-                        <div class="input-sec">
-                            <label for="g-pub">Nhập g: </label>
-                            <input type="text" name="" id="g-pub">
-                            <span class="valid-message"></span>
-                        </div>
-                        <div class="input-sec">
-                            <label for="y-pub">Nhập y: </label>
-                            <input type="text" name="" id="y-pub">
-                            <span class="valid-message"></span>
-                        </div>
-                    </div>
-
-                    <div class="hasmap-select">
-                        <label for="hashmap">Chọn hàm băm</label>
-                        <select name="" id="hashmap">
-                            <option value="HSA-1">HSA-1</option>
-                        </select>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="create-sig-sec text-process">
-                <div class="request">
-                    <h3 class="sec-title">Tạo chữ ký</h3>
+            <div class="process-wrapper">
+                <div class="pub-key-input">
+                    <h3 class="sec-title">Nhập khóa công khai</h3>
                     <fieldset>
-                        <legend class="fieldset-title">Nhập bản rõ</legend>
-                        <textarea name="" id="raw-text"></textarea>
-                        <input type="file" id="text-file">
-                    </fieldset>
-
-                    <div class="rand-sec">
-                        <div class="input-sec">
-                            <label for="private-key">Nhập khóa bí mật: x =  </label>
-                            <input type="text" id="private-key">
-                            <div class="valid-message"></div>
+                        <legend>Nhập bộ khóa công khai {p, q, g, y}:</legend>
+                        <div class="input-lists">
+                            <div class="input-sec">
+                                <label for="p-pub">Nhập p:</label>
+                                <input type="text" id="p-pub">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="q-pub">Nhập q: </label>
+                                <input type="text" id="q-pub">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="g-pub">Nhập g: </label>
+                                <input type="text" name="" id="g-pub">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="y-pub">Nhập y: </label>
+                                <input type="text" name="" id="y-pub">
+                                <span class="valid-message"></span>
+                            </div>
                         </div>
-                    </div>
-                    <button class="btn" id="making-sig">Tạo</button>
+                        <div class="hasmap-select">
+                            <label for="hashmap">Chọn hàm băm</label>
+                            <select name="" id="hashmap">
+                                <option value="HSA-1">HSA-1</option>
+                            </select>
+                        </div>
+                    </fieldset>
                 </div>
-                <fieldset class="respon">
-                    <legend class="fieldset-title">Kết quả chữ ký: </legend>
-                    <textarea name="" id="sig-result"></textarea>
-                    <button class="special-btn save-sig">lưu</button>
-                </fieldset>
-            </div>
-            <div class="verify-sig-sec text-process">
-                <div class="request">
-                    <h3 class="sec-title">Kiểm tra chữ ký</h3>
-                    <fieldset>
-                        <legend class="fieldset-title">Nhập bản rõ</legend>
-                        <textarea name="" id="text-check"></textarea>
-                        <input type="file" id="text-check-file">
+                <div class="create-sig-sec text-process">
+                    <div class="request">
+                        <h3 class="sec-title">Tạo chữ ký</h3>
+                        <fieldset>
+                            <legend class="fieldset-title">Nhập bản rõ</legend>
+                            <textarea name="" id="raw-text"></textarea>
+                            <input type="file" id="text-file">
+                        </fieldset>
+                        <div class="rand-sec">
+                            <div class="input-sec">
+                                <label for="private-key">Nhập khóa bí mật: x =  </label>
+                                <input type="text" id="private-key">
+                                <div class="valid-message"></div>
+                            </div>
+                        </div>
+                        <button class="btn" id="making-sig">Tạo</button>
+                    </div>
+                    <fieldset class="respon">
+                        <legend class="fieldset-title">Kết quả chữ ký: </legend>
+                        <textarea name="" id="sig-result"></textarea>
+                        <button class="special-btn save-sig">lưu</button>
                     </fieldset>
-                    <fieldset>
-                        <legend class="fieldset-title">Nhập chữ ký</legend>
-                        <textarea name="" id="sig-check"></textarea>
-                        <input type="file" id="sig-check-file">
-                    </fieldset>
-                    <button class="btn checking-btn">Kiểm tra</button>
                 </div>
-                <div class="respon">
-                    <p class="">Kết quả kiểm tra: <input type="text" id="checking-res" readonly></p>
+                <div class="verify-sig-sec text-process">
+                    <div class="request">
+                        <h3 class="sec-title">Kiểm tra chữ ký</h3>
+                        <fieldset>
+                            <legend class="fieldset-title">Nhập bản rõ</legend>
+                            <textarea name="" id="text-check"></textarea>
+                            <input type="file" id="text-check-file">
+                        </fieldset>
+                        <fieldset>
+                            <legend class="fieldset-title">Nhập chữ ký</legend>
+                            <textarea name="" id="sig-check"></textarea>
+                            <input type="file" id="sig-check-file">
+                        </fieldset>
+                        <button class="btn checking-btn">Kiểm tra</button>
+                    </div>
+                    <div class="respon">
+                        <p class="">Kết quả kiểm tra: <input type="text" id="checking-res" readonly></p>
+                    </div>
                 </div>
             </div>
         </div>

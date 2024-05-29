@@ -1,11 +1,11 @@
 
-//ham bam mot chuoi chi phan thanh mot chuoi hexa
+//hàm băm một chuỗi văn bản về một chuỗi hexa
 function sha1Hex(str) {
     return CryptoJS.SHA1(str).toString(CryptoJS.enc.Hex);
 }
 
-// ham bam mot chuoi nhi phan sang một số nguyên lớn
-function sha1Binary(str) {
+//hàm băm một chuỗi văn bản về một chuỗi hexa nhưng chuyển sang số bigInt
+function sha1BigInt(str) {
     return bigInt(CryptoJS.SHA1(str).toString(CryptoJS.enc.Hex), 16);
 }
 
@@ -21,8 +21,8 @@ function generatePQ(L, N) {
         let q
         while (true) {
             s = bigInt.randBetween(1, bigInt(2).pow(g)); // tạo một số ngẫu nhiên từ 1 đến 2**(g-1);
-            const a = sha1Binary(s.toString());
-            const zz = sha1Binary(s.plus(1).toString());
+            const a = sha1BigInt(s.toString());
+            const zz = sha1BigInt(s.plus(1).toString());
             const U = a.xor(zz);
             const mask = bigInt(2).pow(N - 1).plus(1);
             q = U.or(mask);
@@ -35,7 +35,7 @@ function generatePQ(L, N) {
             const V = [];
             for (let k = 0; k <= n; k++) {
                 const arg = s.plus(j).plus(k).mod(bigInt(2).pow(g));
-                V.push(sha1Binary(arg.toString()));
+                V.push(sha1BigInt(arg.toString()));
             }
 
             let W = bigInt(0);

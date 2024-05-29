@@ -17,11 +17,6 @@ html{
 
 body{
     color: var(--randColor);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 80px;
     padding: 15px 0;
     background-image: url('./assets/img/background.avif');
 }
@@ -32,13 +27,17 @@ body{
     background-color: white;
     border-radius: 15px;
     padding: 3px 15px;
+    width: 750px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .container{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
 }
 
 .container>div{
@@ -47,20 +46,22 @@ body{
     border-radius: 20px;
     box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.3);
     background-color: #f9f9f9;
-    padding-left: 150px;
+    padding-left: 15px;
 }
 
 
 .create-keys-sec{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+    width: 600px;
+    margin: auto;
 }
 
 fieldset{
     padding: 30px;
     display: flex;
-    gap: 20px;
+    gap: 15px;
     color: #140979;
     border-radius: 30px;
     width: 50%;
@@ -90,7 +91,7 @@ fieldset legend{
 
 .input-sec>input{
     box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.1);
-    height: 40px;
+    height: 30px;
     border: 1px solid #e5e5e5;
     border-radius: 6px;
     transition: .25 border-color;
@@ -116,8 +117,8 @@ fieldset legend{
 
 .btn{
     text-align: center;
-    width: 200px;
-    height: 43px;
+    width: 100px;
+    height: 30px;
     font-size: 15px;
     text-transform: uppercase;
     background-color: #51b7c5;
@@ -155,7 +156,7 @@ fieldset legend{
 .wrapper{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .create-sig-sec{
@@ -178,7 +179,7 @@ fieldset legend{
     flex-direction: column;
     border: 1px solid black;
     border-radius: 6px;
-    gap: 20px;
+    gap: 10px;
     box-shadow: 0px 0px 4px 5px #9fa8f7;
 }
 
@@ -196,7 +197,7 @@ fieldset legend{
 
 .text-process textarea{
     width: 100%;
-    height: 200px;
+    height: 100px;
     padding: 10px;
     overflow: auto;
 }
@@ -227,3 +228,16 @@ fieldset .save-sig{
     align-self: flex-end;
 }
 
+.process-wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
+.wrapper{
+    width: 100% !important;
+    padding: 15px 0 15px 0 !important;
+}
+
+.process-wrapper>div{
+    width: 32%;
+}
