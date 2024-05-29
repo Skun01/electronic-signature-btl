@@ -146,3 +146,39 @@ function powerMod(base, exponent, modulus) {
   
     return result;
   }
+
+  //cac ham tinh modulo nghich dao
+  function modInverse(a, m) {
+    if (gcdBigInt(a, m) !== 1n) {
+      throw new Error('Modulo inverse does not exist');
+    }
+  
+    let [x, y, _] = extendedGcdBigInt(a, m);
+    return (x + m) % m;
+  }
+  
+  function gcdBigInt(a, b) {
+    while (b !== 0n) {
+      let temp = a;
+      a = b;
+      b = temp % b;
+    }
+    return a;
+  }
+  
+  function extendedGcdBigInt(a, b) {
+    if (b === 0n) {
+      return [1n, 0n, a];
+    }
+  
+    let [x1, y1, d1] = extendedGcdBigInt(b, a % b);
+    return [y1, x1 - (a / b) * y1, d1];
+  }
+
+  // Hàm chuyển đổi từ chuỗi hex sang bigInt
+  function hexToBigInt(hexString) {
+    if (!/^[0-9a-fA-F]+$/.test(hexString)) {
+      throw new Error('Invalid hex string');
+    }
+    return BigInt('0x' + hexString);
+  }

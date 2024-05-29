@@ -92,7 +92,6 @@ const yPub = document.querySelector('#y-pub');
 //lay lua chon hash function:
 const hashMapElem = document.querySelector('#hashmap');
 
-
 //chuyen khoa xuong
 sendKeysElem.addEventListener('click', e=>{
     pPub.value = pPrime;
@@ -101,4 +100,103 @@ sendKeysElem.addEventListener('click', e=>{
     yPub.value = y;
 })
 
-//// NGUOI DUNG NHAP MODE:
+/**TAO CHU KY SECTION */
+
+
+// lay K element
+const randKElem = document.querySelector('#rand-k-num');
+
+// lay ket qua chu ky
+const sigResult = document.querySelector('#sig-result');
+
+//lay random k button
+let k;
+const randKBtn = document.querySelector('.rand-k-btn');
+randKBtn.addEventListener('click', e=>{
+        let randKBinary;
+        do{
+            randKBinary = randomBinary(1, 160);
+            k = binaryToBigInt(randKBinary);
+        }while(k >= q);
+        randKElem.value = k;
+});
+
+//lay ban ro thong qua file
+const fileText = document.querySelector('#text-file');
+
+//lay hop textBox hien thi text
+const rawText = document.querySelector('#raw-text');
+
+//xu ly de lay thong tin duoc nhap tu file
+fileText.addEventListener('change', e=>{
+    // lay file
+    const file = fileText.files[0];
+
+    // xac dinh dinh dang file
+    const fileType = file.type;
+    let fileCategory;
+    if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        fileCategory = 'DOCX file';
+    } else if (fileType === 'text/plain') {
+        fileCategory = 'TXT file';
+    }
+
+    // xu ly dinh dang file
+    if(fileCategory === 'TXT file'){
+        const fr = new FileReader();
+        fr.readAsText(file);
+        console.log(file);
+        fr.addEventListener('load', e=>{
+            rawText.value = fr.result;
+        });
+    }else{
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const arrayBuffer = e.target.result;
+            mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                .then(function(result) {
+                    rawText.value = result.value;
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
+
+//lay nut tao
+const makeSigBtn = document.querySelector('#making-sig');
+
+//tao r va s khi bam nui;
+let r, s;
+makeSigBtn.addEventListener('click', function (){
+
+    //tao r
+    r = powerMod(g, k, pPrime)%qPrime;
+    //tao s:
+    
+    //ma hoa text su dung ham bam da chon;
+    let hashText;
+    if(hashMapElem.value == "SHA-1") hashText = SHA1(rawText.value);
+    else hashText = SHA256(rawText.value);
+    console.log(hashText);
+    const bigIntText = hexToBigInt(hashText);
+    s = (modInverse(k, qPrime)*(bigIntText + xRandom*r))%qPrime;
+
+    //hien thi chu ki
+    sigResult.value = r.toString(16) + s.toString(16);
+});
+
+// lưu chữ kí:
+const saveSigBtn = document.querySelector('.save-sig');
+saveSigBtn.addEventListener('click', function() {
+    const text = sigResult.value;
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'signature.txt';
+    a.click();
+});
+

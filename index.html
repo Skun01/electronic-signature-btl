@@ -96,23 +96,23 @@
                     <h3 class="sec-title">Tạo chữ ký</h3>
                     <fieldset>
                         <legend class="fieldset-title">Nhập bản rõ</legend>
-                        <textarea name="" id="sig-res"></textarea>
+                        <textarea name="" id="raw-text"></textarea>
                         <input type="file" id="text-file">
                     </fieldset>
 
                     <div class="rand-sec">
                         <div class="input-sec">
-                            <label for="rand-num">Nhập số K ngẫu nhiên: </label>
-                            <input type="text" id="rand-num">
+                            <label for="rand-k-num">Nhập số K ngẫu nhiên (0 < k < q): </label>
+                            <input type="text" id="rand-k-num">
                             <div class="valid-message"></div>
                         </div>
-                        <button class="rand-btn special-btn">random</button>
+                        <button class="rand-k-btn special-btn">random</button>
                     </div>
                     <button class="btn" id="making-sig">Tạo</button>
                 </div>
                 <fieldset class="respon">
-                    <legend class="fieldset-title">kết quả</legend>
-                    <textarea name="" id="text-typing"></textarea>
+                    <legend class="fieldset-title">Kết quả chữ ký: </legend>
+                    <textarea name="" id="sig-result"></textarea>
                     <button class="special-btn save-sig">lưu</button>
                 </fieldset>
             </div>
@@ -142,6 +142,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="libaries.js"></script>
     <script src="hashFunctionLibraries.js"></script>
     <script src="main.js"></script>
