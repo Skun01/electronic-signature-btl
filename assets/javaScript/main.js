@@ -89,7 +89,7 @@ function resetKeyComponets(){
     customWay.checked = true;
 }
 
-//Chuyen tiep gia tri cua cac khoa xuong ben duoi:
+//Chuyen tiep gia tri cua cac khoa
 
 //lay cac elemnt khoa cong khai:
 const pPub = document.querySelector('#p-pub');
@@ -100,12 +100,30 @@ const yPub = document.querySelector('#y-pub');
 //lay lua chon hash function:
 const hashMapElem = document.querySelector('#hashmap');//KHONG DUNG DEN
 
-//chuyen khoa xuong
+//chuyen khoa
 sendKeysElem.addEventListener('click', e=>{
     pPub.value = pqValue.p;
     qPub.value = pqValue.q;
     gPub.value = ghValue.g;
     yPub.value = xyValue.y;
+    alert("chuyển khóa thành công");
+});
+
+// Lay nut chuyen cua so
+const displayPubKey = document.querySelector('.display-pub-key');
+
+// lấy cửa sổ tạo khóa
+const createKeysSec = document.querySelector('.create-keys-sec');
+
+displayPubKey.addEventListener('click', ()=>{
+    createKeysSec.style.display = "none";
+});
+
+// Lay nut chuyen sang cua so tao khoa
+const displayCreateKeys = document.querySelector('.display-create-keys');
+
+displayCreateKeys.addEventListener('click', ()=>{
+    createKeysSec.style.display = "block";
 });
 
 // TẠO CHỮ KÝ

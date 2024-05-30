@@ -41,7 +41,7 @@ body{
 }
 
 .container>div{
-    border: 1px solid ;
+    border: 1px solid #140979;
     padding: 15px; 
     border-radius: 20px;
     box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.3);
@@ -51,11 +51,20 @@ body{
 
 
 .create-keys-sec{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 600px;
-    margin: auto;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #140979;
+    transition: all 0.25s;
+    display: none;
+}
+
+.create-keys-sec .create-key-way{
+    width: 90%;
 }
 
 fieldset{
@@ -80,7 +89,7 @@ fieldset legend{
 .input-lists{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
 }
 
 .input-sec{
@@ -166,6 +175,7 @@ fieldset legend{
 .pub-key-input{
     display: flex;
     flex-direction: column;
+    position:relative;
 }
 
 .pub-key-input>fieldset{
@@ -231,6 +241,7 @@ fieldset .save-sig{
 .process-wrapper{
     display: flex;
     justify-content: space-around;
+    position: relative;
 }
 
 .wrapper{

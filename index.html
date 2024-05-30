@@ -10,54 +10,54 @@
 <body>
     <h1 class="main-title">Digital signature standard</h1>
     <div class="container">
-        <div class="create-keys-sec cell">
-            <h2 class="sec-title">Tạo khóa</h2>
-            <fieldset class="create-key-way">
-                <legend class="fieldset-title">Tùy chọn tạo khóa</legend>
-                <label class="radio-input"> <input name="create-ways" type="radio" checked id="custom-way"> Nhập tùy chọn</label>
-                <label class="radio-input"> <input name="create-ways" type="radio" id="random-way"> Tạo ngẫu nhiên</label>
-            </fieldset>
-            <div class="input-lists">
-                <div class="input-sec">
-                    <label for="prime-p">Nhập số nguyên tố p (2<sup>L-1</sup> ≤ p ≤ 2<sup>L</sup> và 512 ≤ L ≤ 1024):</label>
-                    <input type="text" id="prime-p">
-                    <span class="valid-message"></span>
-                </div>
-                <div class="input-sec">
-                    <label for="q">Nhập số nguyên tố q sao cho q là là ước của p - 1 (2<sup>159</sup> ≤ q ≤ 2<sup>160</sup>): </label>
-                    <input type="text" id="q">
-                    <span class="valid-message"></span>
-                </div>
-                <div class="input-sec">
-                    <label for="h">Nhập số nguyên h bất kì (1 ≤ h ≤ p - 1) thỏa mãn g = h<sup>(p-1)/q</sup> > 1: </label>
-                    <input type="text" id = "h">
-                    <span class="valid-message"></span>
-                </div>
-                <div class="input-sec">
-                    <label for="x">Nhập số x bất kì (0 < x < q): </label>
-                    <input type="text" name="" id="x">
-                    <span class="valid-message"></span>
-                </div>
-            </div>
-            <div class="btn-sec">
-                <button class="btn create-keys">Tạo khóa</button>
-                <button class="btn reset-btn">Reset</button>
-            </div>
-            <div class="result-sec">
-                <div class="res-wrapper">
-                    <div class="pub-res">Thành phần khóa công khai: y = <input type="text" id="pub-y-res" readonly></div>
-                    <div class="pub-res">Thành phần khóa công khai: g = <input type="text" id="pub-g-res" readonly></div>
-
-                    <div class="priv-res">Khóa bí mật của bạn là: x = <input type="text" id="priv-x-res" readonly></div>
-                </div>
-                <button class="send-res special-btn">chuyển khóa xuống</button>
-            </div>
-        </div>
-
         <div class="wrapper cell">
             <h2 class="sec-title">Tạo và kiểm tra chữ ký</h2>
             <div class="process-wrapper">
                 <div class="pub-key-input">
+                    <div class="create-keys-sec cell">
+                        <h2 class="sec-title">Tạo khóa</h2>
+                        <fieldset class="create-key-way">
+                            <legend class="fieldset-title">Tùy chọn tạo khóa</legend>
+                            <label class="radio-input"> <input name="create-ways" type="radio" checked id="custom-way"> Nhập tùy chọn</label>
+                            <label class="radio-input"> <input name="create-ways" type="radio" id="random-way"> Tạo ngẫu nhiên</label>
+                        </fieldset>
+                        <div class="input-lists">
+                            <div class="input-sec">
+                                <label for="prime-p">Nhập số nguyên tố p (2<sup>L-1</sup> ≤ p ≤ 2<sup>L</sup> và 512 ≤ L ≤ 1024):</label>
+                                <input type="text" id="prime-p">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="q">Nhập số nguyên tố q sao cho q là là ước của p - 1 (2<sup>159</sup> ≤ q ≤ 2<sup>160</sup>): </label>
+                                <input type="text" id="q">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="h">Nhập số nguyên h bất kì (1 ≤ h ≤ p - 1) thỏa mãn g = h<sup>(p-1)/q</sup> > 1: </label>
+                                <input type="text" id = "h">
+                                <span class="valid-message"></span>
+                            </div>
+                            <div class="input-sec">
+                                <label for="x">Nhập số x bất kì (0 < x < q): </label>
+                                <input type="text" name="" id="x">
+                                <span class="valid-message"></span>
+                            </div>
+                        </div>
+                        <div class="btn-sec">
+                            <button class="btn create-keys">Tạo khóa</button>
+                            <button class="btn reset-btn">Reset</button>
+                        </div>
+                        <div class="result-sec">
+                            <div class="res-wrapper">
+                                <div class="pub-res">Thành phần khóa công khai: y = <input type="text" id="pub-y-res" readonly></div>
+                                <div class="pub-res">Thành phần khóa công khai: g = <input type="text" id="pub-g-res" readonly></div>
+            
+                                <div class="priv-res">Khóa bí mật của bạn là: x = <input type="text" id="priv-x-res" readonly></div>
+                            </div>
+                            <button class="send-res special-btn">chuyển các khóa</button>
+                            <button class="display-pub-key special-btn">chuyển sang nhập khóa công khai</button>
+                        </div>
+                    </div>
                     <h3 class="sec-title">Nhập khóa công khai</h3>
                     <fieldset>
                         <legend>Nhập bộ khóa công khai {p, q, g, y}:</legend>
@@ -89,6 +89,7 @@
                                 <option value="HSA-1">HSA-1</option>
                             </select>
                         </div>
+                        <button class="display-create-keys special-btn">chuyển sang tạo khóa</button>
                     </fieldset>
                 </div>
                 <div class="create-sig-sec text-process">
