@@ -96,9 +96,9 @@ const pPub = document.querySelector('#p-pub');
 const qPub = document.querySelector('#q-pub');
 const gPub = document.querySelector('#g-pub');
 const yPub = document.querySelector('#y-pub');
+const privateKeyX = document.querySelector('#private-key');
 
 //lay lua chon hash function:
-const hashMapElem = document.querySelector('#hashmap');//KHONG DUNG DEN
 
 //chuyen khoa
 sendKeysElem.addEventListener('click', e=>{
@@ -106,6 +106,7 @@ sendKeysElem.addEventListener('click', e=>{
     qPub.value = pqValue.q;
     gPub.value = ghValue.g;
     yPub.value = xyValue.y;
+    privateKeyX.value = xyValue.x;
     alert("chuyển khóa thành công");
 });
 
@@ -164,14 +165,16 @@ fileText.addEventListener('change', e=>{
 });
 
 //Lay gia tri cua khoa bi mat x
-const privateKeyX = document.querySelector('#private-key');
 
 //lấy sự kiện click vào nút tạo chữ ký:
 const signBtn = document.querySelector('#making-sig');
 
 //lấy ô textbox hiển thị kết quả ký
 const sigResult = document.querySelector('#sig-result');
- 
+
+//hash map ans
+const hashMapElem = document.querySelector('#hashmap');
+
 signBtn.addEventListener('click', e=>{
     //chuyển văn bản
     const M = rawText.value;
@@ -181,7 +184,7 @@ signBtn.addEventListener('click', e=>{
 
     //hiển thị cặp chữ kí r và s vào ô kết quả ký
     sigResult.value = rsObj.r.toString() + "/" + rsObj.s.toString();
-    console.log(rsObj.r.toString() + " " + rsObj.s.toString())
+    hashMapElem.value = rsObj.hashMapText;
 });
 
 // lưu chữ kí:
@@ -202,6 +205,9 @@ saveSigBtn.addEventListener('click', function() {
 const textCheckElem = document.querySelector('#text-check');
 //lay nut input file ban ro
 const textCheckFile = document.querySelector('#text-check-file');
+
+
+
 
 //xử lý để lấy bản rõ được nhập từ file
 textCheckFile.addEventListener('change', e=>{
@@ -262,9 +268,17 @@ checkingBtnElem.addEventListener('click', e=>{
     const s = bigInt(rsArray[1]);
     //Lấy bản rõ:
     let M = textCheckElem.value;
-    let checkAnswer = verify(M, r, s, bigInt(pPub.value), bigInt(qPub.value), bigInt(gPub.value), bigInt(yPub.value));
+    // let checkAnswer = verify(M, r, s, bigInt(pPub.value), bigInt(qPub.value), bigInt(gPub.value), bigInt(yPub.value));
     //hiển thị kết quả lên màn hình
-    checkingResult.value = checkAnswer ? "Tất cả điều đáng tin cậy!" : "Tất cả KHÔNG đáng tin cậy!"
+    checkingResult.value = checkAnswer ? "Tất cả điều đáng tin cậy!" : "Tất cả KHÔNG đáng tin cậy!";
 });
+
+
+const sendText = document.querySelector('.send-text');
+sendText.addEventListener('click', e=>{
+    textCheckElem.value = rawText.value;
+    sigCheckElem.value = sigResult.value;
+});
+
 
 

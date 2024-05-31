@@ -83,12 +83,6 @@
                                 <span class="valid-message"></span>
                             </div>
                         </div>
-                        <div class="hasmap-select">
-                            <label for="hashmap">Chọn hàm băm</label>
-                            <select name="" id="hashmap">
-                                <option value="HSA-1">HSA-1</option>
-                            </select>
-                        </div>
                         <button class="display-create-keys special-btn">chuyển sang tạo khóa</button>
                     </fieldset>
                 </div>
@@ -109,10 +103,15 @@
                         </div>
                         <button class="btn" id="making-sig">Tạo</button>
                     </div>
+                    <div class="hasmap-select">
+                        <label for="hashmap">Hàm băm: </label>
+                        <input type="text" id = 'hashmap'>
+                    </div>
                     <fieldset class="respon">
                         <legend class="fieldset-title">Kết quả chữ ký: </legend>
                         <textarea name="" id="sig-result"></textarea>
                         <button class="special-btn save-sig">lưu</button>
+                        <button class="special-btn send-text">Chuyển văn bản</button>
                     </fieldset>
                 </div>
                 <div class="verify-sig-sec text-process">

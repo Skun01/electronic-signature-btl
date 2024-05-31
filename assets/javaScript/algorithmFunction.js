@@ -83,14 +83,15 @@ function generateParams(L, N) {
 
 //ham tao chu ki voi M la chuoi dau vao
 function sign(M, p, q, g, x) {
-
+    let hashMapText;
     while (true) {
         const k = bigInt.randBetween(2, q); // so ngau nhien k
         const r = g.modPow(k, p).mod(q); // r = (g**k mod p) mod q
-        const m = bigInt(sha1Hex(M), 16); // chuyển đổi thông điệp M thành giá trị băm va chuyen ve so nguyen
+        hashMapText = sha1Hex(M);
+        const m = bigInt(hashMapText, 16); // chuyển đổi thông điệp M thành giá trị băm va chuyen ve so nguyen
         try {
             const s = k.modInv(q).multiply(m.add(x.multiply(r))).mod(q); // s = cong thuc da cho;
-            return { r, s };
+            return { r, s, hashMapText};
         } catch (e) {
             // Loop to try again if invert fails
         }
