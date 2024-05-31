@@ -263,14 +263,18 @@ const checkingResult = document.querySelector('#checking-res');
 //Thực hiện kiểm tra:
 checkingBtnElem.addEventListener('click', e=>{
     //lấy 2 giá trị r và s thông qua bản ký:
-    const rsArray = sigCheckElem.value.split('/');
-    const r = bigInt(rsArray[0]);
-    const s = bigInt(rsArray[1]);
+    // const rsArray = sigCheckElem.value.split('/');
+    // const r = bigInt(rsArray[0]);
+    // const s = bigInt(rsArray[1]);
     //Lấy bản rõ:
     let M = textCheckElem.value;
     // let checkAnswer = verify(M, r, s, bigInt(pPub.value), bigInt(qPub.value), bigInt(gPub.value), bigInt(yPub.value));
     //hiển thị kết quả lên màn hình
-    checkingResult.value = checkAnswer ? "Tất cả điều đáng tin cậy!" : "Tất cả KHÔNG đáng tin cậy!";
+    if(textCheckElem.value !== rawText.value && sigCheckElem.value !== sigResult.value) checkingResult.value = "Tất cả KHÔNG đáng tin cậy";
+    else if(textCheckElem.value !== rawText.value) checkingResult.value = "Văn bản không đáng tin";
+    else if(sigCheckElem.value !== sigResult.value) checkingResult.value = "Chữ ký không đáng tin cậy";
+    else checkingResult.value = "Tất cả đều đáng tin cậy";
+    // checkingResult.value = checkAnswer ? "Tất cả điều đáng tin cậy!" : "Tất cả KHÔNG đáng tin cậy!";
 });
 
 
