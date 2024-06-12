@@ -91,7 +91,10 @@
                         <h3 class="sec-title">Tạo chữ ký</h3>
                         <fieldset>
                             <legend class="fieldset-title">Nhập bản rõ</legend>
-                            <textarea name="" id="raw-text"></textarea>
+                            <div class="text-wrapper">
+                                <textarea name="" id="raw-text"></textarea>
+                                <div class="word-text word-"></div>
+                            </div>
                             <input type="file" id="text-file">
                         </fieldset>
                         <div class="rand-sec">
@@ -105,7 +108,7 @@
                     </div>
                     <div class="hasmap-select">
                         <label for="hashmap">Hàm băm: </label>
-                        <input type="text" id = 'hashmap'>
+                        <input type="text" id = 'hashmap' readonly>
                     </div>
                     <fieldset class="respon">
                         <legend class="fieldset-title">Kết quả chữ ký: </legend>
@@ -119,15 +122,25 @@
                         <h3 class="sec-title">Kiểm tra chữ ký</h3>
                         <fieldset>
                             <legend class="fieldset-title">Nhập bản rõ</legend>
-                            <textarea name="" id="text-check"></textarea>
+                            <div class="text-wrapper">
+                                <textarea name="" id="text-check"></textarea>
+                                <div class="word-text"></div>
+                            </div>
+
                             <input type="file" id="text-check-file">
                         </fieldset>
+                        
                         <fieldset>
                             <legend class="fieldset-title">Nhập chữ ký</legend>
                             <textarea name="" id="sig-check"></textarea>
                             <input type="file" id="sig-check-file">
                         </fieldset>
                         <button class="btn checking-btn">Kiểm tra</button>
+                    </div>
+
+                    <div class="hasmap-select">
+                        <label for="check-sec-hashmap">Hàm băm: </label>
+                        <input type="text" id = 'check-sec-hashmap' readonly>
                     </div>
                     <div class="respon">
                         <p class="">Kết quả kiểm tra: <input type="text" id="checking-res" readonly></p>

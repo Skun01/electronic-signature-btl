@@ -156,7 +156,7 @@ fieldset legend{
     width: 300px;
     height: 25px;
     padding: 3px;
-
+    color: white;
 }
 .res-wrapper>div{
     margin-bottom: 5px;
@@ -251,4 +251,28 @@ fieldset .save-sig{
 
 .process-wrapper>div{
     width: 32%;
+}
+
+.valid-infor{
+    background-color: green !important;
+    border-color: green !important;
+}
+
+.invalid-infor{
+    background-color: red !important;
+    border-color: red !important;
+}
+
+.text-wrapper{
+    position: relative;
+}
+
+.word-text{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    display: none;
 }

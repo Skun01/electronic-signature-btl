@@ -109,6 +109,7 @@ function verify(M, r, s, p, q, g, y) {
         return v.equals(r);
 }
 
+
 //ham kiem tra tinh hop le cua p, q va g
 function validateParams(p, q, g) {
     return p.isProbablePrime() && q.isProbablePrime() && g.modPow(q, p).equals(1) && g.gt(1) && p.minus(1).mod(q).equals(0);

@@ -89,6 +89,9 @@ function resetKeyComponets(){
     customWay.checked = true;
 }
 
+// lấy cửa sổ tạo khóa
+const createKeysSec = document.querySelector('.create-keys-sec');
+
 //Chuyen tiep gia tri cua cac khoa
 
 //lay cac elemnt khoa cong khai:
@@ -108,13 +111,13 @@ sendKeysElem.addEventListener('click', e=>{
     yPub.value = xyValue.y;
     privateKeyX.value = xyValue.x;
     alert("chuyển khóa thành công");
+    createKeysSec.style.display = "none";
 });
 
 // Lay nut chuyen cua so
 const displayPubKey = document.querySelector('.display-pub-key');
 
-// lấy cửa sổ tạo khóa
-const createKeysSec = document.querySelector('.create-keys-sec');
+
 
 displayPubKey.addEventListener('click', ()=>{
     createKeysSec.style.display = "none";
@@ -134,6 +137,10 @@ const fileText = document.querySelector('#text-file');
 
 //lay hop textBox hien thi text
 const rawText = document.querySelector('#raw-text');
+
+//lay the div nhằm hiển thị file word
+
+const disPlayWordText = document.querySelector('')
 
 //xu ly de lay thong tin duoc nhap tu file
 fileText.addEventListener('change', e=>{
@@ -199,6 +206,14 @@ saveSigBtn.addEventListener('click', function() {
     a.click();
 });
 
+// lấy nút chuyển văn bản, chuyển cả văn bản và chữ ký sang phần kiểm tra chữ ký
+
+const sendText = document.querySelector('.send-text');
+sendText.addEventListener('click', e=>{
+    textCheckElem.value = rawText.value;
+    sigCheckElem.value = sigResult.value;
+});
+
 /**KIỂM TRA CHỮ KÝ */
 
 //lấy bản rõ
@@ -260,29 +275,40 @@ const checkingBtnElem = document.querySelector('.checking-btn');
 // lấy element kết quả kiểm tra:
 const checkingResult = document.querySelector('#checking-res');
 
+// lấy nút hàm băm của phần xác nhận chữ ký:
+const checkSecHashMapElem = document.querySelector('#check-sec-hashmap');
+
+
 //Thực hiện kiểm tra:
 checkingBtnElem.addEventListener('click', e=>{
     //lấy 2 giá trị r và s thông qua bản ký:
-    // const rsArray = sigCheckElem.value.split('/');
-    // const r = bigInt(rsArray[0]);
-    // const s = bigInt(rsArray[1]);
+    const rsArray = sigCheckElem.value.split('/');
+    const r = bigInt(rsArray[0]);
+    const s = bigInt(rsArray[1]);
+
     //Lấy bản rõ:
     let M = textCheckElem.value;
-    // let checkAnswer = verify(M, r, s, bigInt(pPub.value), bigInt(qPub.value), bigInt(gPub.value), bigInt(yPub.value));
+    //hiển thị hàm băm của bản rõ
+    checkSecHashMapElem.value = sha1Hex(M);
+
+    let checkAnswer = verify(M, r, s, bigInt(pPub.value), bigInt(qPub.value), bigInt(gPub.value), bigInt(yPub.value));
+    if(checkAnswer){
+        checkingResult.value = "Thông tin đáng tin cậy!";
+        checkingResult.classList.add('valid-infor');
+    }else{
+        checkingResult.value = "Thông tin KHÔNG đáng tin cậy!";
+        checkingResult.classList.add('invalid-infor');
+    }
+});
+
+
+
+
+
+
+
     //hiển thị kết quả lên màn hình
-    if(textCheckElem.value !== rawText.value && sigCheckElem.value !== sigResult.value) checkingResult.value = "Tất cả KHÔNG đáng tin cậy";
-    else if(textCheckElem.value !== rawText.value) checkingResult.value = "Văn bản không đáng tin";
-    else if(sigCheckElem.value !== sigResult.value) checkingResult.value = "Chữ ký không đáng tin cậy";
-    else checkingResult.value = "Tất cả đều đáng tin cậy";
-    // checkingResult.value = checkAnswer ? "Tất cả điều đáng tin cậy!" : "Tất cả KHÔNG đáng tin cậy!";
-});
-
-
-const sendText = document.querySelector('.send-text');
-sendText.addEventListener('click', e=>{
-    textCheckElem.value = rawText.value;
-    sigCheckElem.value = sigResult.value;
-});
-
-
-
+    // if(textCheckElem.value !== rawText.value && sigCheckElem.value !== sigResult.value) checkingResult.value = "Tất cả KHÔNG đáng tin cậy";
+    // else if(textCheckElem.value !== rawText.value) checkingResult.value = "Văn bản không đáng tin";
+    // else if(sigCheckElem.value !== sigResult.value) checkingResult.value = "Chữ ký không đáng tin cậy";
+    // else checkingResult.value = "Tất cả đều đáng tin cậy";
