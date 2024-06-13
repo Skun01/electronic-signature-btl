@@ -139,8 +139,7 @@ const fileText = document.querySelector('#text-file');
 const rawText = document.querySelector('#raw-text');
 
 //lay the div nhằm hiển thị file word
-
-const disPlayWordText = document.querySelector('')
+const disPlayWordText = document.querySelector('.word-make-sig');
 
 //xu ly de lay thong tin duoc nhap tu file
 fileText.addEventListener('change', e=>{
@@ -151,16 +150,26 @@ fileText.addEventListener('change', e=>{
     if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         const reader = new FileReader();
         reader.onload = function(e) {
-            const arrayBuffer = e.target.result;
-            mammoth.extractRawText({ arrayBuffer: arrayBuffer })
-                .then(function(result) {
-                    rawText.value = result.value;
-                })
-                .catch(function(err) {
-                    console.error(err);
-                });
+            // mammoth.convertToHtml({ arrayBuffer: e.target.result })
+            //     .then(function(result) {
+            //         disPlayWordText.innerHTML = result.value;
+            //         disPlayWordText.style.display = "flex";
+            //     })
+            //     .catch(function(err) {
+            //         console.error(err);
+            //     });
+
+            var arrayBuffer = e.target.result;
+            AsposeWords.load(arrayBuffer).then(function(doc) {
+                var html = doc.save(AsposeWords.SaveFormat.HTML);
+                disPlayWordText.innerHTML = html;
+            }).catch(function(err) {
+                console.error('Error processing document:', err);
+                alert("Error reading file: " + err.message);
+            });
         };
         reader.readAsArrayBuffer(file);
+        disPlayWordText.style.display = "flex";
     } else if (fileType === 'text/plain') {
         const fr = new FileReader();
         fr.readAsText(file);
@@ -168,6 +177,9 @@ fileText.addEventListener('change', e=>{
         fr.addEventListener('load', e=>{
             rawText.value = fr.result;
         });
+
+        disPlayWordText.style.display = "none";
+
     }
 });
 

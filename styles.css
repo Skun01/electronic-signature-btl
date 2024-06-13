@@ -275,4 +275,5 @@ fieldset .save-sig{
     top: 0;
     left: 0;
     display: none;
+    overflow: auto;
 }
