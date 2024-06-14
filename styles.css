@@ -156,6 +156,9 @@ fieldset legend{
     width: 300px;
     height: 25px;
     padding: 3px;
+}
+
+#checking-res{
     color: white;
 }
 .res-wrapper>div{

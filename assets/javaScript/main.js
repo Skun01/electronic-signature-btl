@@ -139,7 +139,7 @@ const fileText = document.querySelector('#text-file');
 const rawText = document.querySelector('#raw-text');
 
 //lay the div nhằm hiển thị file word
-const disPlayWordText = document.querySelector('.word-make-sig');
+const displayWordText = document.querySelector('.word-make-sig');
 
 //xu ly de lay thong tin duoc nhap tu file
 fileText.addEventListener('change', e=>{
@@ -150,26 +150,26 @@ fileText.addEventListener('change', e=>{
     if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         const reader = new FileReader();
         reader.onload = function(e) {
-            // mammoth.convertToHtml({ arrayBuffer: e.target.result })
-            //     .then(function(result) {
-            //         disPlayWordText.innerHTML = result.value;
-            //         disPlayWordText.style.display = "flex";
-            //     })
-            //     .catch(function(err) {
-            //         console.error(err);
-            //     });
-
             var arrayBuffer = e.target.result;
-            AsposeWords.load(arrayBuffer).then(function(doc) {
-                var html = doc.save(AsposeWords.SaveFormat.HTML);
-                disPlayWordText.innerHTML = html;
-            }).catch(function(err) {
-                console.error('Error processing document:', err);
-                alert("Error reading file: " + err.message);
-            });
+                mammoth.convertToHtml({arrayBuffer: arrayBuffer}, {
+                    styleMap: [
+                        "p[style-name='Heading 1'] => h1:fresh",
+                        "p[style-name='Heading 2'] => h2:fresh",
+                        "p[style-name='Heading 3'] => h3:fresh",
+                        "p[style-name='Heading 4'] => h4:fresh",
+                        "p[style-name='Heading 5'] => h5:fresh",
+                        "p[style-name='Heading 6'] => h6:fresh",
+                        "b => strong",
+                        "i => em",
+                        "u => underline",
+                        "strike => del",
+                        "color => span"
+                    ]
+                }).then(displayResult)
+                  .catch(handleError);
         };
         reader.readAsArrayBuffer(file);
-        disPlayWordText.style.display = "flex";
+        displayWordText.style.display = "flex";
     } else if (fileType === 'text/plain') {
         const fr = new FileReader();
         fr.readAsText(file);
@@ -177,11 +177,18 @@ fileText.addEventListener('change', e=>{
         fr.addEventListener('load', e=>{
             rawText.value = fr.result;
         });
-
-        disPlayWordText.style.display = "none";
-
+        displayWordText.style.display = "none";
     }
 });
+
+function displayResult(result) {
+    displayWordText.innerHTML = result.value;
+    rawText.value = result.value;
+}
+
+function handleError(err) {
+    console.log(err);
+}
 
 //Lay gia tri cua khoa bi mat x
 
@@ -307,9 +314,11 @@ checkingBtnElem.addEventListener('click', e=>{
     if(checkAnswer){
         checkingResult.value = "Thông tin đáng tin cậy!";
         checkingResult.classList.add('valid-infor');
+        checkingResult.classList.remove('invalid-infor');
     }else{
         checkingResult.value = "Thông tin KHÔNG đáng tin cậy!";
         checkingResult.classList.add('invalid-infor');
+        checkingResult.classList.remove('valid-infor');
     }
 });
 
