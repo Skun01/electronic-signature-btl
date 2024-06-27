@@ -1,5 +1,6 @@
 
 //hàm băm một chuỗi văn bản về một chuỗi hexa
+
 function sha1Hex(str) {
     return CryptoJS.SHA1(str).toString(CryptoJS.enc.Hex);
 }
@@ -69,7 +70,8 @@ function generateGH(p, q) {
 }
 
 //ham tao hai khoa x va y:
-function generateKeys(g, p, q,x = bigInt.randBetween(2, q)) {
+function generateKeys(g, p, q) {
+    const x = bigInt.randBetween(2, q);
     const y = g.modPow(x, p);
     return { x, y };
 }
@@ -83,19 +85,12 @@ function generateParams(L, N) {
 
 //ham tao chu ki voi M la chuoi dau vao
 function sign(M, p, q, g, x) {
-    let hashMapText;
-    while (true) {
-        const k = bigInt.randBetween(2, q); // so ngau nhien k
-        const r = g.modPow(k, p).mod(q); // r = (g**k mod p) mod q
-        hashMapText = sha1Hex(M);
-        const m = bigInt(hashMapText, 16); // chuyển đổi thông điệp M thành giá trị băm va chuyen ve so nguyen
-        try {
-            const s = k.modInv(q).multiply(m.add(x.multiply(r))).mod(q); // s = cong thuc da cho;
-            return { r, s, hashMapText};
-        } catch (e) {
-            // Loop to try again if invert fails
-        }
-    }
+    const k = bigInt.randBetween(2, q); // so ngau nhien k
+    const r = g.modPow(k, p).mod(q); // r = (g**k mod p) mod q
+    let hashMapText = sha1Hex(M);
+    const m = bigInt(hashMapText, 16); // chuyển đổi thông điệp M thành giá trị băm va chuyen ve so nguyen
+    const s = k.modInv(q).multiply(m.add(x.multiply(r))).mod(q); // s = cong thuc da cho;
+    return { r, s, hashMapText};
 }
 
 //ham xac nhan chu ky
@@ -105,7 +100,6 @@ function verify(M, r, s, p, q, g, y) {
         let u1 = m.multiply(w).mod(q);
         let u2 = r.multiply(w).mod(q);
         let v = g.modPow(u1, p).multiply(y.modPow(u2, p)).mod(p).mod(q);
-        console.log(M,m);
         return v.equals(r);
 }
 
@@ -119,21 +113,3 @@ function validateParams(p, q, g) {
 function validateSign(r, s, q) {
     return r.gt(0) && r.lt(q) && s.gt(0) && s.lt(q);
 }
-
-// const N = 160;
-// const L = 1024;
-// const { p, q, g } = generateParams(L, N);
-// const { x, y } = generateKeys(g, p, q);
-
-// const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-// const encoder = new TextEncoder();
-// const M = encoder.encode(text);
-// console.log(M, text);
-// const { r, s } = sign(M, p, q, g, x);
-// const test = "hayha";
-// const te = encoder.encode(test);
-// if (verify(te, r, s, p, q, g, y)) {
-//     console.log('All ok');
-// }
-
-// console.log(r.toString(), s.toString());
